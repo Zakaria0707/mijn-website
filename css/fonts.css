@@ -1,0 +1,42 @@
+/* Header achtergrond en padding */
+header {
+    background-color: #051940;
+    padding: 10px;
+}
+
+/* Navigatie styling */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Titel styling */
+h1 {
+    color: white;
+    margin: 0;
+}
+
+/* Navigatielink styling */
+.nav-link {
+    color: #FFFFFF; /* Wit */
+    text-decoration: none;
+}
+/* Navigatielijst styling */
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Nav-item spacing */
+.nav-item {
+    margin-left: 15px;
+}
+
+/* Hover effect voor links (optioneel) */
+.nav-link:hover {
+    color: #4101f3; /* Gele hover kleur, pas aan naar wens */
+}
