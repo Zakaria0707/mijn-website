@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- Bootstrap CSS icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <!-- JavaScript: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+        <!-- eigen geschreven css voor jouw html-bestand -->
+        <link rel="stylesheet" href="/css/reset.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/fonts.css">
+</head>
+<body class="p-3 m-0 border-0 bd-example bs-light background-image" >
+  <!--Navigatiebar-->
+  <header>
+    <nav>
+      <a href="index.html">
+        <img src="assets/images/eazp.png" alt="Logo" width="100" height="100">
+      </a>
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="project.html">Projecten</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="portfolio.html">Portfolio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container mt-5">
+    <div class="row">
+        <main class="col-md-9">
+            <!-- Main content area -->
+            <h1  style="color: white; margin: 0;">Contacteer Ons</h1>
+            <!-- Contact form -->
+            <form action="submit_contact_form.php" method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label"  style="color: white; margin: 0;">Naam</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label"  style="color: white; margin: 0;">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label"  style="color: white; margin: 0;">Bericht</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                </div>                
+                <button type="submit" class="btn btn-primary" >Verzenden</button>
+            </form>
+        </main>
+        <aside class="col-md-3">
+            <!-- Contact informatie -->
+            <h2 class="text-uppercase fs-4 fw-bolder pt-3"  style="color: white; margin: 0;">Contact</h2>
+            <p  style="color: white; margin: 0;">EAZ<br>
+                email <a href="mailto:satecom@info.be">eaz@info.be</a><br>
+                phone +32 689 63 45 78</p>
+            <ul class="list-inline socials">
+                <li class="list-inline-item">
+                    <a href="https://www.youtube.com" target="_blank">
+                        <i class="bi bi-youtube fs-3"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.instagram.com" target="_blank">
+                        <i class="bi bi-instagram fs-3"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.facebook.com" target="_blank">
+                        <i class="bi bi-facebook fs-3"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://twitter.com/" target="_blank">
+                        <i class="bi bi-twitter fs-3"></i>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+    </div>
+</div>
+
+    <!-- Matrix Regen Canvas -->
+<canvas id="matrixCanvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></canvas>
+
+<script>
+    const canvas = document.getElementById("matrixCanvas");
+    const context = canvas.getContext("2d");
+
+    // Canvas aanpassen aan schermgrootte
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const characters = "01"; // Matrix-tekens
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(columns).fill(1);
+
+    // Matrix regen-animatie tekenen
+    function drawMatrix() {
+        context.fillStyle = "rgba(5, 25, 64, 0.05)"; // Transparante achtergrond met jouw kleur #051940
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        context.fillStyle = "#556273"; // Matrix-tekens in kleur #556273
+        context.font = fontSize + "px monospace";
+
+        drops.forEach((y, index) => {
+            const text = characters.charAt(Math.floor(Math.random() * characters.length));
+            const x = index * fontSize;
+            context.fillText(text, x, y * fontSize);
+
+            if (y * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[index] = 0;
+            }
+            drops[index]++;
+        });
+    }
+
+    setInterval(drawMatrix, 50);
+
+    // Schermresolutie bijwerken wanneer het venster wordt aangepast
+    window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        drops.fill(1); // Reset de drops bij resize
+    });
+</script>
+
+  </div>  
+  <br>
+  <hr>
+    <footer class="footer text-center">
+      <p> <img src="assets/images/eazp.png" alt="" width="50" height="50"> &copy; 2024 portfolio. Zakaria El Abdi SNBD3.</p>
+</body>
+</html>
